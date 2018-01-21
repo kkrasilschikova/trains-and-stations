@@ -3,7 +3,7 @@ package TrainsAndStations
 import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 import scala.util.{Failure, Success, Try}
 
-object Main {
+object Main{
   val prep = new Preparation
 
   def main(args: Array[String]): Unit = go(prep.allTrains)
@@ -34,10 +34,7 @@ object Main {
       }
     }
     //train has finished its route
-    else {
-      train.done = true
-      println(s"train ${train.number} finished")
-    }
+    else train.done = true
   }
 
   //break array of Train into pairs

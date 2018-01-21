@@ -5,16 +5,20 @@ import scala.util.Try
 
 class Preparation {
   //input - paths and routes
-  val path1 = Path(Station(1), Station(2), 4)
-  val path2 = Path(Station(2), Station(3), 3)
+  val path1 = Path(Station(1), Station(2), 5)
+  val path2 = Path(Station(2), Station(3), 4)
   val path3 = Path(Station(3), Station(4), 2)
   val path4 = Path(Station(2), Station(5), 5)
-  val paths: List[Path] = List(path1, path2, path3, path4)
+  val path5 = Path(Station(5), Station(6), 3)
+  val path6 = Path(Station(1), Station(6), 5)
+  val path7 = Path(Station(4), Station(5), 4)
+  val paths: List[Path] = List(path1, path2, path3, path4, path5, path6, path7)
 
-  val r1 = Route(List(Station(1), Station(2), Station(3)))
-  val r2 = Route(List(Station(5), Station(2), Station(3), Station(4)))
-  val r3 = Route(List(Station(3), Station(2), Station(1)))
-  val routes: List[Route] = List(r1, r2, r3)
+  val r1 = Route(List(Station(6), Station(1), Station(2), Station(5), Station(6)))
+  val r2 = Route(List(Station(5), Station(2), Station(3)))
+  val r3 = Route(List(Station(1), Station(2), Station(5)))
+  val r4 = Route(List(Station(4), Station(3), Station(2)))
+  val routes: List[Route] = List(r1, r2, r3, r4)
 
   //building the whole network
   def reverse(path: Path) = Path(path.st2, path.st1, path.length)
