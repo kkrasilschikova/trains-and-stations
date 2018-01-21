@@ -2,7 +2,7 @@
 Define if and where trains crash based on input.
 
 ### Assumptions:
-Minimum 2 trains, for each train minimum path is 2 stations (the first is where the train begins its journey).  
+Minimum 2 trains, for each train minimum path is 2 stations (the first is where the train begins its journey).
 Trains start from different stations and named after the first station.
 If trains crash or reach their final destinations, they disappear from the network.  
 All input is done in Preparations class:  
