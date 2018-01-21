@@ -59,7 +59,7 @@ class Preparation {
 
   val allTrains: ArrayBuffer[Train] = new ArrayBuffer[Train]
   for (i <- routes.indices)
-    allTrains += new Train(number = routes(i).list.head.number, stations = routes(i),
+    allTrains += new Train(number = i + 1, stations = routes(i),
       route = richRoutes(i), future = Try(routes(i).list.tail.head), current = Try(routes(i).list.head),
       left = richRoutes(i).head.length, visited = 1, done = false)
 
