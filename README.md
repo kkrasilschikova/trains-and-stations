@@ -1,5 +1,5 @@
 # trains-and-stations
-Define if and where trains crash based on input.
+Define if and where trains crash based on input of paths and routes.
 
 ### Assumptions:
 1) Minimum 2 trains.

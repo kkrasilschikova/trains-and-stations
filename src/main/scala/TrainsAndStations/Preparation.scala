@@ -14,8 +14,8 @@ class Preparation {
   val path7 = Path(Station(4), Station(5), 4)
   val paths: List[Path] = List(path1, path2, path3, path4, path5, path6, path7)
 
-  val r1 = Route(List(Station(6), Station(1), Station(2), Station(5), Station(6)))
-  val r2 = Route(List(Station(5), Station(2), Station(3)))
+  val r1 = Route(List(Station(6), Station(1), Station(2), Station(5), Station(6))) //this is train 1
+  val r2 = Route(List(Station(5), Station(2), Station(3))) //this is train 2 etc.
   val r3 = Route(List(Station(1), Station(2), Station(5)))
   val r4 = Route(List(Station(4), Station(3), Station(2)))
   val routes: List[Route] = List(r1, r2, r3, r4)
