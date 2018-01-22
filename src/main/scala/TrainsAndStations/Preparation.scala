@@ -18,7 +18,9 @@ class Preparation {
   val train2 = Route(List(Station(5), Station(2), Station(3)))
   val train3 = Route(List(Station(1), Station(2), Station(5)))
   val train4 = Route(List(Station(4), Station(3), Station(2)))
-  val routes: List[Route] = List(train1, train2, train3, train4)
+  val routes: List[Route] = List(train1, train2, train3, train4).filter(_.list.length >= 2 )
+
+  if (routes.isEmpty) {println("There are no moving trains, exit"); System.exit(0)}
 
   //building the whole network
   def reverse(path: Path) = Path(path.st2, path.st1, path.length)
