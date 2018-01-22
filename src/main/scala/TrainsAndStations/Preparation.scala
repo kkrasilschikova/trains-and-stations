@@ -14,11 +14,11 @@ class Preparation {
   val path7 = Path(Station(4), Station(5), 4)
   val paths: List[Path] = List(path1, path2, path3, path4, path5, path6, path7)
 
-  val r1 = Route(List(Station(6), Station(1), Station(2), Station(5), Station(6))) //this is train 1
-  val r2 = Route(List(Station(5), Station(2), Station(3))) //this is train 2 etc.
-  val r3 = Route(List(Station(1), Station(2), Station(5)))
-  val r4 = Route(List(Station(4), Station(3), Station(2)))
-  val routes: List[Route] = List(r1, r2, r3, r4)
+  val train1 = Route(List(Station(6), Station(1), Station(2), Station(5), Station(6)))
+  val train2 = Route(List(Station(5), Station(2), Station(3)))
+  val train3 = Route(List(Station(1), Station(2), Station(5)))
+  val train4 = Route(List(Station(4), Station(3), Station(2)))
+  val routes: List[Route] = List(train1, train2, train3, train4)
 
   //building the whole network
   def reverse(path: Path) = Path(path.st2, path.st1, path.length)
@@ -27,9 +27,9 @@ class Preparation {
   //grouped by 2 stations
   def groupByTwo(route: Route): List[List[Station]] = route.list.sliding(2,1).toList
 
-  /*val lists1: List[List[Station]] = groupByTwo(r1)
-  val lists2: List[List[Station]] = groupByTwo(r2)
-  val lists3: List[List[Station]] = groupByTwo(r3)*/
+  /*val lists1: List[List[Station]] = groupByTwo(train1)
+  val lists2: List[List[Station]] = groupByTwo(train2)
+  val lists3: List[List[Station]] = groupByTwo(train3)*/
   val lists: List[List[List[Station]]] = routes.map(x => groupByTwo(x))
 
   //groups of 2 stations and path in between
@@ -50,12 +50,12 @@ class Preparation {
 
   val maxTime: Int = timeRoutes.max
 
-  /*val t1 = new Train(r1.list.head.number, r1, richRoute1, Try(r1.list.tail.head),
+  /*val t1 = new Train(train1.list.head.number, train1, richRoute1, Try(train1.list.tail.head),
     Try(r1.list.head), richRoute1.head.length, 1, false)
-  val t2 = new Train(r2.list.head.number, r2, richRoute2,  Try(r2.list.tail.head),
-    Try(r2.list.head), richRoute2.head.length, 1, false)
-  val t3 = new Train(r3.list.head.number, r3, richRoute3,  Try(r3.list.tail.head),
-    Try(r3.list.head), richRoute3.head.length, 1, false)*/
+  val t2 = new Train(train2.list.head.number, train2, richRoute2,  Try(train2.list.tail.head),
+    Try(train2.list.head), richRoute2.head.length, 1, false)
+  val t3 = new Train(train3.list.head.number, train3, richRoute3,  Try(train3.list.tail.head),
+    Try(train3.list.head), richRoute3.head.length, 1, false)*/
 
   val allTrains: ArrayBuffer[Train] = new ArrayBuffer[Train]
   for (i <- routes.indices)
