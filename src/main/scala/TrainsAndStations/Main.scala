@@ -34,7 +34,7 @@ object Main{
       }
     }
     //train has finished its route
-    else train.done = true
+    else {train.done = true; println(s"train ${train.number} finished")}
   }
 
   //break array of Train into pairs
@@ -74,6 +74,7 @@ object Main{
       trains --= trains.filter(_.done == true)
       maxTime -= 1
     }
+    if (trains.length ==1 ) println(s"just train ${trains.head.number} left, it will finish its journey successfully")
   }
 
 }
