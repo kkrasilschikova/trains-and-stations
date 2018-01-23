@@ -1,0 +1,11 @@
+{"path":{"start":1, "finish":2, "length":5}}
+{"path":{"start":2, "finish":3, "length":4}}
+{"path":{"start":3, "finish":4, "length":2}}
+{"path":{"start":2, "finish":5, "length":5}}
+{"path":{"start":5, "finish":6, "length":3}}
+{"path":{"start":1, "finish":6, "length":5}}
+{"path":{"start":4, "finish":5, "length":4}}
+{"train":[6,1,2,5,6]}
+{"train":[5,2,3]}
+{"train":[1,2,5]}
+{"train":[4,3,2]}
