@@ -5,7 +5,7 @@ Define if and where trains crash based on input of paths and routes.
 1) If trains crash or reach their final destinations, they disappear from the network.
 2) All input is done through provided file, example
 
-`{"path":{"start":1, "finish":2, "length":5}}  
+```{"path":{"start":1, "finish":2, "length":5}}  
  {"path":{"start":2, "finish":3, "length":4}}  
  {"path":{"start":3, "finish":4, "length":2}}  
  {"path":{"start":2, "finish":5, "length":5}}  
@@ -15,7 +15,8 @@ Define if and where trains crash based on input of paths and routes.
  {"train":[6,1,2,5,6]}  
  {"train":[5,2,3]}  
  {"train":[1,2,5]}  
- {"train":[4,3,2]}`
+ {"train":[4,3,2]}
+ ```
  
  * Every entry should be on a separate line
  * Path is 2 stations and length in between defined as `{"path":{"start":1, "finish":2, "length":5}}`
