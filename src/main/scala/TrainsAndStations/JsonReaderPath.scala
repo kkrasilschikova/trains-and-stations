@@ -2,12 +2,12 @@ package TrainsAndStations
 
 import play.api.libs.json.JsValue
 
-trait JsonReader[A] {
+trait JsonReaderPath[A] {
   def read(value: A): Path
 }
 
-object JsonReaderInstances {
-  implicit val reader: JsonReader[JsValue] = new JsonReader[JsValue] {
+object JsonReaderPathInstances {
+  implicit val pathReader: JsonReaderPath[JsValue] = new JsonReaderPath[JsValue] {
     def read(value: JsValue): Path = {
       val st1 = (value \ "path" \ "start").as[Int] match {
         case start => Station(start)
@@ -21,9 +21,9 @@ object JsonReaderInstances {
   }
 }
 
-object JsonReaderSyntax {
+object JsonReaderPathSyntax {
   implicit class JsonReaderOps[A](value: A) {
-    def toPath(implicit r: JsonReader[A]): Path =
+    def toPath(implicit r: JsonReaderPath[A]): Path =
       r.read(value)
   }
 }

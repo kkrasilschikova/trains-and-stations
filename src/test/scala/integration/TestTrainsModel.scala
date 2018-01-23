@@ -18,7 +18,7 @@ class TestTrainsModel extends FeatureSpec with GivenWhenThen {
 
       val train1 = Route(List(Station(4), Station(2), Station(3)))
       val train2 = Route(List(Station(3), Station(2)))
-      val routes = List(train1, train2).filter(_.list.length >= 2 )
+      val routes = List(train1, train2).filter(_.list.length >= 2)
       if (routes.isEmpty) {println("There are no moving trains, exit"); System.exit(0)}
 
       When("we form custom ArrayBuffer[Train]")
@@ -80,7 +80,7 @@ class TestTrainsModel extends FeatureSpec with GivenWhenThen {
       val paths = List(path1, path2, path3)
 
       val train1 = Route(List(Station(4), Station(2), Station(3)))
-      val routes = List(train1).filter(_.list.length >= 2 )
+      val routes = List(train1).filter(_.list.length >= 2)
       if (routes.isEmpty) {println("There are no moving trains, exit"); System.exit(0)}
 
       When("we form custom ArrayBuffer[Train]")
