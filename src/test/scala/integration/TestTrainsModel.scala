@@ -22,15 +22,14 @@ class TestTrainsModel extends FeatureSpec with GivenWhenThen {
       if (routes.isEmpty) {println("There are no moving trains, exit"); System.exit(0)}
 
       When("we form custom ArrayBuffer[Train]")
-      val prep = new Preparation
-      val n = Network((paths ++ paths.map(x => prep.reverse(x))).toSet)
-      val lists: List[List[List[Station]]] = routes.map(x => prep.groupByTwo(x))
+      val n = Network((paths ++ paths.map(x => Main.reverse(x))).toSet)
+      val lists: List[List[List[Station]]] = routes.map(x => Main.groupByTwo(x))
 
       def fullPath(list: List[List[Station]]): List[Path] = list.flatMap(elem =>
         n.set.filter(path => path.st1 == elem.head && path.st2 == elem(1)))
 
       val richRoutes: List[List[Path]] = lists.map(x => fullPath(x))
-      val timeRoutes: List[Int] = richRoutes.map(x => prep.timeOfRoute(x))
+      val timeRoutes: List[Int] = richRoutes.map(x => Main.timeOfRoute(x))
       var maxTime: Int = timeRoutes.max
 
       val allTrains: ArrayBuffer[Train] = new ArrayBuffer[Train]
@@ -84,15 +83,14 @@ class TestTrainsModel extends FeatureSpec with GivenWhenThen {
       if (routes.isEmpty) {println("There are no moving trains, exit"); System.exit(0)}
 
       When("we form custom ArrayBuffer[Train]")
-      val prep = new Preparation
-      val n = Network((paths ++ paths.map(x => prep.reverse(x))).toSet)
-      val lists: List[List[List[Station]]] = routes.map(x => prep.groupByTwo(x))
+      val n = Network((paths ++ paths.map(x => Main.reverse(x))).toSet)
+      val lists: List[List[List[Station]]] = routes.map(x => Main.groupByTwo(x))
 
       def fullPath(list: List[List[Station]]): List[Path] = list.flatMap(elem =>
         n.set.filter(path => path.st1 == elem.head && path.st2 == elem(1)))
 
       val richRoutes: List[List[Path]] = lists.map(x => fullPath(x))
-      val timeRoutes: List[Int] = richRoutes.map(x => prep.timeOfRoute(x))
+      val timeRoutes: List[Int] = richRoutes.map(x => Main.timeOfRoute(x))
       var maxTime: Int = timeRoutes.max
 
       val allTrains: ArrayBuffer[Train] = new ArrayBuffer[Train]

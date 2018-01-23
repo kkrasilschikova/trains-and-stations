@@ -1,12 +1,68 @@
 package TrainsAndStations
 
+import java.io.File
+
+import play.api.libs.json.Json
+
 import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 import scala.util.{Failure, Success, Try}
 
-object Main{
-  val prep = new Preparation
+import JsonReaderPathInstances._
+import JsonReaderPathSyntax._
 
-  def main(args: Array[String]): Unit = go(prep.allTrains)
+object Main{
+  def main(args: Array[String]): Unit = {
+    if (args.isEmpty) println("Please specify source file")
+    else {
+      val filepath = args(0)
+
+      if (new File(filepath).exists() && new File(filepath).isFile) {
+        val file = io.Source.fromFile(filepath)
+        val lines = file.getLines().toList
+
+        val paths: List[Path] = lines.map(x => Try(Json.parse(x))
+          .flatMap(y => Try(y.toPath))).filter(_.isSuccess).map(_.get)
+
+        import JsonReaderRouteInstances._
+        import JsonReaderRouteSyntax._
+
+        val routes: List[Route] = lines.map(x => Try(Json.parse(x))
+          .flatMap(y => Try(y.toRoute))).filter(_.isSuccess).map(_.get)
+
+        if (routes.isEmpty) println("There are no moving trains, exit")
+        else {
+          //building the whole network
+          val n = Network((paths ++ paths.map(x => reverse(x))).toSet)
+          val lists: List[List[List[Station]]] = routes.map(x => groupByTwo(x))
+
+          //groups of 2 stations and path in between
+          def fullPath(list: List[List[Station]]): List[Path] = list.flatMap(elem =>
+            n.set.filter(path => path.st1 == elem.head && path.st2 == elem(1)))
+
+          val richRoutes: List[List[Path]] = lists.map(x => fullPath(x))
+
+          val timeRoutes: List[Int] = richRoutes.map(x => timeOfRoute(x))
+          val maxTime: Int = timeRoutes.max
+
+          val allTrains: ArrayBuffer[Train] = new ArrayBuffer[Train]
+          for (i <- routes.indices)
+            allTrains += new Train(number = i + 1, stations = routes(i),
+              route = richRoutes(i), future = Try(routes(i).list.tail.head), current = Try(routes(i).list.head),
+              left = richRoutes(i).head.length, visited = 1, done = false)
+          go(allTrains, maxTime)
+        }
+      }
+      else println("Source file doesn't exist")
+    }
+  }
+
+  def reverse(path: Path) = Path(path.st2, path.st1, path.length)
+
+  //grouped by 2 stations
+  def groupByTwo(route: Route): List[List[Station]] = route.list.sliding(2,1).toList
+
+  //define time for every route
+  def timeOfRoute(route: List[Path]): Int = route.map(x => x.length).sum
 
   def theSameStation(train1: Train, train2: Train): Boolean =
     train1.future == train2.future && train1.left == train2.left && train1.left == 1
@@ -46,9 +102,8 @@ object Main{
     pairs
   }
 
-  var maxTime: Int = prep.maxTime
-
-  def go(trains: ArrayBuffer[Train]): Unit = {
+  def go(trains: ArrayBuffer[Train], time: Int): Unit = {
+    var maxTime = time
     while (maxTime >= 0 && trains.length > 1) {
       trains.foreach(step)
       //remove if trains on the same path or station
@@ -74,7 +129,7 @@ object Main{
       trains --= trains.filter(_.done == true)
       maxTime -= 1
     }
-    if (trains.length ==1 ) println(s"just train ${trains.head.number} left, it will finish its journey successfully")
+    if (trains.length == 1) println(s"just train ${trains.head.number} left, it will finish its journey successfully")
   }
 
 }
