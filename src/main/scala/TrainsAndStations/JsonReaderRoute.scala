@@ -9,7 +9,7 @@ trait JsonReaderRoute[A] {
 object JsonReaderRouteInstances {
   implicit val routeReader: JsonReaderRoute[JsValue] = new JsonReaderRoute[JsValue] {
     def read(value: JsValue): Route = {
-      val stations = (value \ "route").as[List[Int]] match {
+      val stations = (value \ "train").as[List[Int]] match {
         case list => list.map(x => Station(x))
       }
       Route(stations)
